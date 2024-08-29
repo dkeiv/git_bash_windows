@@ -29,7 +29,7 @@ unset THEME
 ## Requisites
 
 * In order for this theme to render correctly, you will need a
-[Powerline-patched font](https://github.com/powerline/fonts).
+[Nerd Font](https://github.com/ryanoasis/nerd-fonts).
 
 ## License
 
