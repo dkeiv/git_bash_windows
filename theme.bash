@@ -6,20 +6,15 @@
 # Git code based on https://github.com/joeytwiddle/git-aware-prompt/blob/master/prompt.sh
 # More info about color codes in https://en.wikipedia.org/wiki/ANSI_escape_code
 
-ARROW_ICON="\n 󱞩"
+ARROW_ICON="\n 󱞩 "
 PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
 POWERLINE_LEFT_SEPARATOR=" "
-POWERLINE_PROMPT="last_status time_stamp user_info cwd logo scm"
+POWERLINE_PROMPT="last_status time_stamp user_info cwd scm"
 
 TIME_STAMP_COLOR="Bl W"
 
 USER_INFO_SSH_CHAR=" "
 USER_INFO_PROMPT_COLOR="C W B"
-
-GITHUB_LOGO=" "
-GITHUB_LOGO_PROMPT_COLOR="B W"
-WINDOW_LOGO=" "
-WINDOW_LOGO_PROMPT_COLOR="B W"
 
 SCM_GIT_CHAR=" "
 SCM_PROMPT_CLEAN="󰃢"
@@ -84,7 +79,7 @@ function __color {
 }
 
 function __powerline_time_stamp_prompt {
-  echo "\t|${TIME_STAMP_COLOR}"
+  echo "\A |${TIME_STAMP_COLOR}"
 }
 
 function __powerline_user_info_prompt {
@@ -95,26 +90,24 @@ function __powerline_user_info_prompt {
   else
     user_info="\u@\h"
   fi
-  # user_info="${GITHUB_LOGO}"
+
   [[ -n "${user_info}" ]] && echo "${user_info} |${color}"
 }
 
 function __powerline_cwd_prompt {
   # echo "\w |${CWD_PROMPT_COLOR}"
   # echo "${CWD_PROMPT_ICON} \w |${CWD_PROMPT_COLOR}"
-  echo "${CWD_PROMPT_ICON}:\\~\W |${CWD_PROMPT_COLOR}"
+  echo "${CWD_PROMPT_ICON}: \W |${CWD_PROMPT_COLOR}"
 }
 
-function __powerline_logo_prompt {
-  local logo="${WINDOW_LOGO} |${WINDOW_LOGO_PROMPT_COLOR}"
-  is_a_work_tree=$(git rev-parse --is-inside-work-tree 2>/dev/null)
-
-  if [[ "${is_a_work_tree}" == true ]]; then
-    logo="${GITHUB_LOGO} |${GITHUB_LOGO_PROMPT_COLOR}"
-  fi
-
-  echo "${logo}"
-}
+# function __powerline_logo_prompt {
+#   is_a_work_tree=$(git rev-parse --is-inside-work-tree 2>/dev/null)
+#   local logo=""
+#   if [[ "${is_a_work_tree}" == true ]]; then
+#     logo="${GIT_LOGO} |${GIT_LOGO_PROMPT_COLOR}"
+#   fi
+#   echo "${logo}"
+# }
 
 function __powerline_scm_prompt {
   git_local_branch=""
